@@ -9,7 +9,7 @@ const fieldCharacter = '░';
 const pathCharacter = '*';
 
 class Field {
-  constructor(width,height,holes) {
+  constructor(width = 0,height = 0,holes = 0) {
     this._width = width
     this._height = height
     this._holes = holes
@@ -33,6 +33,15 @@ class Field {
   }
   set lastMoveIndex(newValue){
     this._lastMoveIndex = newValue
+  }
+  set width(newValue){
+    this._width = newValue
+  }
+  set height(newValue){
+    this._height = newValue
+  }
+  set holes(newValue){
+    this._holes = newValue
   }
   generateField() {
     const arrLength = this.height * this._width;
@@ -78,15 +87,13 @@ class Field {
     console.log(this._visualFieldArray.join(""))
   };
 }
+let newPlay = new Field()
 
-process.stdout.write("Choose the width?")
-process.stdin.on("data", chooseWidth)
-process.stdout.write("Choose the height?")
-process.stdin.on("data", chooseHeight)
-process.stdout.write("Choose the holes?")
-process.stdin.on("data", chooseHoles)
+newPlay.width = parseInt(prompt('Choose the width: '));
+newPlay.height = parseInt(prompt('Choose the height: '));
+newPlay.holes = parseInt(prompt('Choose the number of holes: '));
 
-let newPlay = new Field(10,10,30)
+
 newPlay.generateField()
 console.log(newPlay.visualFieldArray)
 newPlay.print()
